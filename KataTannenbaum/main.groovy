@@ -11,34 +11,46 @@ class Display {
 }
 
 
-class Tannenbaumfabrik {
-    private String[] Äste_bauen(int höhe) {
+class Tannenbaum {
+    private int _höhe;
+
+    Tannenbaum(int höhe) {
+        _höhe = höhe;
+    }
+
+
+    private String[] Äste_herrichten() {
         List<String> äste = []
         def breite = 1
-        for(int i=1; i<=höhe; i++) {
+        (1.._höhe).forEach({i ->
             def ast = "".padRight(breite, "X")
-            ast = "".padRight(höhe-i, " ") + ast
+            ast = "".padRight(_höhe-i, " ") + ast
             äste.add(ast)
             breite += 2
-        }
+        })
+
         return äste.toArray()
     }
 
-    private String Stamm_bauen(int höhe) {
-        return "".padRight(höhe-1, " ") + "I"
+    private String Stamm_schnitzen() {
+        return "".padRight(_höhe-1, " ") + "I"
+    }
+
+    private String zusammenstecken(String[] äste, String stamm) {
+        return String.join("\n", äste) + "\n$stamm"
     }
 
 
-    String bauen(int höhe) {
-        def äste = Äste_bauen(höhe)
-        def stamm = Stamm_bauen(höhe)
-        return String.join("\n", äste) + "\n$stamm"
+    String bauen() {
+        def äste = Äste_herrichten()
+        def stamm = Stamm_schnitzen()
+        return zusammenstecken(äste, stamm)
     }
 }
 
 
 def display = new Display()
-def t = new Tannenbaumfabrik()
+def t = new Tannenbaum(5)
 
-def baum = t.bauen(5)
+def baum = t.bauen()
 display.ausgeben(baum)
