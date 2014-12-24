@@ -4,26 +4,41 @@
  * Kata-Beschreibung: https://app.box.com/files/0/f/885439646/1/f_15903236703
  */
 
-def Äste_zeichnen(int höhe) {
-    def breite = 1
-    for(int i=1; i<=höhe; i++) {
-        def ast = "".padRight(breite, "X")
-        ast = "".padRight(höhe-i, " ") + ast
-        println ast
-        breite += 2
+class Display {
+    void ausgeben(String text) {
+        println text
     }
-    return breite
 }
 
-def Stamm_zeichnen(int breite) {
-    def stamm = "".padRight(breite/2-1, " ") + "I"
-    println stamm
+
+class Tannenbaumfabrik {
+    private String[] Äste_bauen(int höhe) {
+        List<String> äste = []
+        def breite = 1
+        for(int i=1; i<=höhe; i++) {
+            def ast = "".padRight(breite, "X")
+            ast = "".padRight(höhe-i, " ") + ast
+            äste.add(ast)
+            breite += 2
+        }
+        return äste.toArray()
+    }
+
+    private String Stamm_bauen(int höhe) {
+        return "".padRight(höhe-1, " ") + "I"
+    }
+
+
+    String bauen(int höhe) {
+        def äste = Äste_bauen(höhe)
+        def stamm = Stamm_bauen(höhe)
+        return String.join("\n", äste) + "\n$stamm"
+    }
 }
 
-def Tannenbaum_zeichnen(int höhe) {
-    def breite = Äste_zeichnen(höhe)
-    Stamm_zeichnen(breite)
-}
 
-Tannenbaum_zeichnen(5)
+def display = new Display()
+def t = new Tannenbaumfabrik()
 
+def baum = t.bauen(5)
+display.ausgeben(baum)
