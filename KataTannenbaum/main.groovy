@@ -49,8 +49,11 @@ class Tannenbaum {
 }
 
 
+print "Anzahl der Äste (1..n): "
+def astzahl = Integer.parseInt(new Scanner(System.in).nextLine())
+
 def display = new Display()
-def t = new Tannenbaum(5)
+def t = new Tannenbaum(astzahl)
 
 def baum = t.bauen()
 display.ausgeben(baum)
