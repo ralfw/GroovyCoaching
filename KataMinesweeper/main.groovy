@@ -1,28 +1,28 @@
 /**
  * Created by ralfw on 30.12.14.
  */
-void Schreibe_Mogelzettel(String dateiname, List<String> mogelzettel) {
-    def f = new File(dateiname)
-    f.withWriter {w -> mogelzettel.each {l -> w << "$l\n"}}
+import daten.*
+import adapter.*
+import domain.*
+
+
+def (String spielfelddateiname, String mogelzetteldateiname) = CLIadapter.kommandozeilenparameter_lesen(args)
+def spielfeldPM = Dateiadapter.lese_Spielfeld(spielfelddateiname)
+def mogelzettelPM = berechne_Mogelzettel(spielfeldPM)
+Dateiadapter.schreibe_Mogelzettel(mogelzetteldateiname, mogelzettelPM)
+
+
+def berechne_Mogelzettel(String[] spielfeldPM) {
+    def mogelzettel = new Mogelzettel()
+    Mogler.zellen_klassifizieren(spielfeldPM,
+            {Spielfeldzelle minenzelle ->
+                def mogelzelle = Mogler.behandle_Mine(minenzelle)
+                mogelzettel.hinzufügen(mogelzelle)
+            },
+            {Spielfeldzelle leereZelle ->
+                def mogelzelle = Mogler.ermittle_Anzahl_umliegender_Minen(leereZelle)
+                mogelzettel.hinzufügen(mogelzelle)
+            }
+    )
+    return mogelzettel.serialisieren()
 }
-
-def Lese_Spielfeld(dateiname) {
-    def f = new File(dateiname)
-    return f.readLines()
-}
-
-def Kommandozeilenparameter_parsen(String[] args) {
-    return ["spielfelddateiname":args[0], "mogelzetteldateiname":args[1]]
-}
-
-
-def Berechne_Mogelzettel(spielfeld) {
-    return ["0"].plus(spielfeld)
-}
-
-
-def dateinamen = Kommandozeilenparameter_parsen(args)
-def spielfeld = Lese_Spielfeld(dateinamen["spielfelddateiname"])
-def mogelzettel = Berechne_Mogelzettel(spielfeld)
-Schreibe_Mogelzettel(dateinamen["mogelzetteldateiname"], mogelzettel)
-
