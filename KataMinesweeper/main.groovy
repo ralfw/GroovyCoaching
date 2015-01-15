@@ -14,15 +14,7 @@ Dateiadapter.schreibe_Mogelzettel(mogelzetteldateiname, mogelzettelPM)
 
 def berechne_Mogelzettel(String[] spielfeldPM) {
     def mogelzettel = new Mogelzettel()
-    Mogler.zellen_klassifizieren(spielfeldPM,
-            {Spielfeldzelle minenzelle ->
-                def mogelzelle = Mogler.behandle_Mine(minenzelle)
-                mogelzettel.hinzufügen(mogelzelle)
-            },
-            {Spielfeldzelle leereZelle ->
-                def mogelzelle = Mogler.ermittle_Anzahl_umliegender_Minen(leereZelle)
-                mogelzettel.hinzufügen(mogelzelle)
-            }
-    )
+    Mogler.mogeln(spielfeldPM,
+        mogelzettel.&hinzufügen)
     return mogelzettel.serialisieren()
 }

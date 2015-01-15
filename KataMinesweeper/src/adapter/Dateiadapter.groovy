@@ -9,8 +9,8 @@ class Dateiadapter {
         f.withWriter { w -> mogelzettel.each { l -> w << "$l\n" } }
     }
 
-    static def lese_Spielfeld(String dateiname) {
+    static String[] lese_Spielfeld(String dateiname) {
         def f = new File(dateiname)
-        return f.readLines()
+        return f.readLines().toArray()
     }
 }
