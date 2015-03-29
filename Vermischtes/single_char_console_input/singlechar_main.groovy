@@ -12,3 +12,4 @@ print "char: "
 def ch = (char)new ConsoleReader().readCharacter()
 
 println "typed: $ch"
+

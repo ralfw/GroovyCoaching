@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/akkaexploration/akkaexploration.iml" filepath="$PROJECT_DIR$/akkaexploration/akkaexploration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rcscsvviewertest/rcscsvviewertest.iml" filepath="$PROJECT_DIR$/rcscsvviewertest/rcscsvviewertest.iml" />
       <module fileurl="file://$PROJECT_DIR$/single_char_console_input/single_char_console_input.iml" filepath="$PROJECT_DIR$/single_char_console_input/single_char_console_input.iml" />
       <module fileurl="file://$PROJECT_DIR$/yamlexploration/yamlexploration.iml" filepath="$PROJECT_DIR$/yamlexploration/yamlexploration.iml" />
       <module fileurl="file://$PROJECT_DIR$/yatzy/yatzy.iml" filepath="$PROJECT_DIR$/yatzy/yatzy.iml" />
